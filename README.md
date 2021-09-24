@@ -10,3 +10,15 @@ KAYNAK GÖSTERMEK KOŞULUYLA HER TÜRLÜ ALINTI YAPILABİLİR
 #procedure
 #function
 #datagrip
+#dbeaver
+#dbms
+#rdbms
+#relation
+#relational
+#primarykey
+#foreignkey
+#sql
+#nosql
+#pgsql
+#plsql
+#tsql
