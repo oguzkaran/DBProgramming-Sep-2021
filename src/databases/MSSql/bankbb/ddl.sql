@@ -18,23 +18,33 @@
 
   Not: Bu veritabanı ileride normalize edilecektir
 ----------------------------------------------------------------------------------------------------------------------*/
+
+create database bankdb
+
+go
+
+use bankdb
+
+go
+
 create table customers (
-    customer_id serial primary key,
-    citizen_number char(11) unique check(length(citizen_number) = 11) not null,
-    number varchar(9) unique not null,
-    first_name varchar(100) not null,
-    middle_name varchar(100),
-    family_name varchar(100) not null,
-    birth_date date not null,
-    married boolean default(false) not null,
-    phone_number char(14) not null
-);
+	customer_id int primary key identity(1, 1),
+	citizen_number char(11) unique check(len(citizen_number) = 11) not null,
+	number varchar(9) unique not null,
+	first_name nvarchar(100) not null,
+	middle_name nvarchar(100),
+	family_name nvarchar(100) not null,
+	birthdate date not null,
+	married bit default(0) not null,
+	phone_number char(14) not null
+)
+
+go
 
 create table cards (
-    card_number char(16) primary key,
-    customer_id integer references customers(customer_id) not null,
-    expiry_month integer check(1 <= expiry_month and expiry_month <= 12) not null,
-    expiry_year integer check(expiry_year >= 0) not null,
+	card_number char(16) primary key,
+	customer_id int foreign key references customers(customer_id) not null,
+	expiry_month int check(1 <= expiry_month and expiry_month <= 12) not null,
+	expiry_year integer check(expiry_year >= 0) not null,
     security_code char(3) not null
-);
-
+)
