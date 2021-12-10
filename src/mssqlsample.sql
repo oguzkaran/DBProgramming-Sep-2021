@@ -1,93 +1,69 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Aşağıdaki tablolara göre yine aşağıdaki soruları yanıtlayınız
-	Veritabanı ismi tennisclubappdb. Tablolar:
-	- court_status
-		- curt_status_id
-		- description (Reserved, Available, Not Available)
+	Sınıf Çalışması: Aşağıda açıklanan bankappdb veritabanını ve ilgili sorulara ilişkin kodları yazınız
+	bankappdb veritabanının tabloları:
+	- nationalities
+		- id
+		- description ('TC', 'US', ...)
+	- customers
+		- id
+		- citizen_id
+		- nationality_id
+		- number
+		- first_name
+		- middle_name
+		- family_name
+		- email
+		- is_alive
+		- is_active
+		- is_personnel
+		- is_local
+	- phone_types
+		- id
+		- description (GSM, Home, Work, Urgent...)
 
-	- court_types
-		- curt_type_id
-		- description (Open, Closed, OpenOrClosed)
+	- phones
+		- id
+		- customer_id
+		- phone_type_id
+		- phone
+	- addresses
+		- id
+		- customer_id
+		- description
+	- card_types
+		- id
+		- description (Visa, Maestro, Master, ...)
+	- cards
+		- id
+		- customer_id
+		- number
+		- expiry_date_month
+		- expiry_date_year
+		- ccv
+		- card_type_id
+		
+	Sorular:
+	- Parametresi ile aldığı müşteri numarasına göre müşterinin aşağıdaki bilgilerini tablo biçiminde döndüren 
+	get_card_info_by_customer_number fonksiyonunu yazınız
+		1. Adı Soyadı
+		2. Kart numarası: ilk 4(dört) hanesi gözücek şekilde. Geri kalanlar X olarak
+		3. ccv: İlk karakteri gözükecek şekilde. Geri kalanlar * olarak
+		4. Kart türünün yazısal karşılığı
+		5. Kartın son kullanma tarihi bilgisi: aa/yyyy
+		6. Kart sahibinin personel olup olmadığı bilgisi
+		7. Kartın sahibinin yaşayıp yaşamadığı bilgisi
 
-	- courts 
-		- court_id
-		- name
-		- court_status_id
-		- court_type_id
+	- Parametresi ile aldığı kart tür id'sine göre aktif olan ve yurt dışında ikamet eden müşterilerin aşağıdaki bilgilerini tablo
+	biçiminde döndüren get_nonlocal_customer_info_by_card_type fonksiyonunu yazınız:
+		1. Adı Soyadı
+		2. Kart numarası: ilk 4(dört) hanesi gözücek şekilde. Geri kalanlar X olarak
+		3. ccv: İlk karakteri gözükecek şekilde. Geri kalanlar * olarak
+		4. Kart türünün yazısal karşılığı
+		5. Kartın son kullanma tarihi bilgisi: aa/yyyy
+		6. Kart sahibinin personel olup olmadığı bilgisi
+		7. Kartın sahibinin yaşayıp yaşamadığı bilgisi
+		8. Müşterini uyruğu
 
-	Sorular: 
-		- Tüm kortların bilgilerini detaylı olarak getiren sorguyu yazınız
-		- Tüm kortların bilgilerini detaylı olarak Türkçe karşılıkları ile getiren sorguyu yazınız	
+
+
 ----------------------------------------------------------------------------------------------------------------------*/
-create database tennisclubappdb
-
-go
-
-use tennisclubappdb
-
-go
-
-create table court_status (
-	court_status_id int primary key identity(1, 1),
-	description nvarchar(32) not null
-)
-
-go
-
-insert into court_status (description) 
-values
-('Reserved'),
-('Available'),
-('Not Available')
-
-go
-
-create table court_types (
-	court_type_id int primary key identity(1, 1),
-	description nvarchar(32) not null
-)
-
-go
-
-insert into court_types (description) 
-values
-('Open'),
-('Closed'),
-('OpenOrClosed')
-
-go
-
-create table courts (
-	court_id int primary key identity(1, 1),
-	name nvarchar(100) not null,
-	court_status_id int references court_status(court_status_id),
-	court_type_id int references court_types(court_type_id),
-)
-
-go
-
--- Tüm kortların bilgilerini detaylı olarak getiren sorguyu yazınız
-
-select 
-	c.name, cs.description, ct.description
-from 
-court_status cs inner join courts c on cs.court_status_id = c.court_status_id
-inner join court_types ct on ct.court_type_id = c.court_type_id
-
--- Tüm kortların bilgilerini detaylı olarak Türkçe karşılıkları ile getiren sorguyu yazınız	
-
-select 
-c.name,
-case c.court_type_id
-	when 1 then 'Açık'
-	when 2 then 'Kapalı'
-	else 'Açık veya Kapalı'
-end,
-case c.court_status_id
-	when 1 then 'Rezerve Edilmiş'
-	when 2 then 'Müsait'
-	else 'Müsait değil'
-end
-from courts c
-
-
