@@ -1,17 +1,23 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Açıklanan fonksiyonları yazınız ve aşağıdaki tablo ile test ediniz:
-		people
-			- person_id
-			- citizen_id
-			- first_name
-			- middle_name
-			- family_name
-			- marital_status
-	- Parametresi ile aldığı 3(üç) tane yazıyı aralarına boşluk koyarak birleştiren ancak null değer varsa veya tamamı boşluk (whitespace)
-	karakterleri içeriyorsa yazıya dahil etmeyen get_full_text fonksiyonunu yazınız
+	Sınıf Çalışması: Aşağıdaki tablolara göre yine aşağıdaki soruları yanıtlayınız
+	Veritabanı ismi tennisclubappdb. Tablolar:
+	- court_status
+		- curt_status_id
+		- description (Reserved, Available, Not Available)
 
-	- Parametresi ile aldığı person_id bilgisine göre ismin tamamını, citizen_id ve marital_status_text bilgilerini tablo olarak
-	döndüren get_person_by_id fonksiyonunu yazınız
+	- court_types
+		- curt_type_id
+		- description (Open, Closed, OpenOrClosed)
+
+	- courts 
+		- court_id
+		- name
+		- court_status_id
+		- court_type_id
+
+	Sorular: 
+		- Tüm kortların bilgilerini detaylı olarak getiren sorguyu yazınız
+		- Tüm kortların bilgilerini detaylı olarak Türkçe karşılıkları ile getiren sorguyu yazınız	
 ----------------------------------------------------------------------------------------------------------------------*/
 create function get_full_text(@s1 nvarchar(max), @s2 nvarchar(max), @s3 nvarchar(max))
 returns nvarchar(max)
