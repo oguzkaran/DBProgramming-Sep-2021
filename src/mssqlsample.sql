@@ -63,7 +63,4 @@
 		6. Kart sahibinin personel olup olmadığı bilgisi
 		7. Kartın sahibinin yaşayıp yaşamadığı bilgisi
 		8. Müşterini uyruğu
-
-
-
 ----------------------------------------------------------------------------------------------------------------------*/
