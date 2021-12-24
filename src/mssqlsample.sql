@@ -1,66 +1,39 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Aşağıda açıklanan bankappdb veritabanını ve ilgili sorulara ilişkin kodları yazınız
-	bankappdb veritabanının tabloları:
-	- nationalities
-		- id
-		- description ('TC', 'US', ...)
-	- customers
-		- id
-		- citizen_id
-		- nationality_id
-		- number
+	Sınıf Çalışması: Aşağıdaki verilen tabloya ilişkin istenenleri yapınız. Tablo schollappdb veritabanı içerisinde
+	olacaktır
+	students:
+		-citizen_id
 		- first_name
 		- middle_name
 		- family_name
-		- email
-		- is_alive
-		- is_active
-		- is_personnel
-		- is_local
-	- phone_types
-		- id
-		- description (GSM, Home, Work, Urgent...)
+		- birth_date
+		- register_date
 
-	- phones
-		- id
-		- customer_id
-		- phone_type_id
-		- phone
-	- addresses
-		- id
-		- customer_id
-		- description
-	- card_types
-		- id
-		- description (Visa, Maestro, Master, ...)
-	- cards
-		- id
-		- customer_id
-		- number
-		- expiry_date_month
-		- expiry_date_year
-		- ccv
-		- card_type_id
-		
-	Sorular:
-	- Parametresi ile aldığı müşteri numarasına göre müşterinin aşağıdaki bilgilerini tablo biçiminde döndüren 
-	get_card_info_by_customer_number fonksiyonunu yazınız
-		1. Adı Soyadı
-		2. Kart numarası: ilk 4(dört) hanesi gözücek şekilde. Geri kalanlar X olarak
-		3. ccv: İlk karakteri gözükecek şekilde. Geri kalanlar * olarak
-		4. Kart türünün yazısal karşılığı
-		5. Kartın son kullanma tarihi bilgisi: aa/yyyy
-		6. Kart sahibinin personel olup olmadığı bilgisi
-		7. Kartın sahibinin yaşayıp yaşamadığı bilgisi
+	İstenen Sorgular:
+		Not: İstenen tüm sorgular tablo döndüren fonksiyonlar biçiminde yazılacaktır
+		- Okul dönemi Eylül ve Haziran arası olmak üzere doğum günü okul dönemi içerisinde olan öğrencileri 
+		yaşlarıyla birlikte getiren sorgu
 
-	- Parametresi ile aldığı kart tür id'sine göre aktif olan ve yurt dışında ikamet eden müşterilerin aşağıdaki bilgilerini tablo
-	biçiminde döndüren get_nonlocal_customer_info_by_card_type fonksiyonunu yazınız:
-		1. Adı Soyadı
-		2. Kart numarası: ilk 4(dört) hanesi gözücek şekilde. Geri kalanlar X olarak
-		3. ccv: İlk karakteri gözükecek şekilde. Geri kalanlar * olarak
-		4. Kart türünün yazısal karşılığı
-		5. Kartın son kullanma tarihi bilgisi: aa/yyyy
-		6. Kart sahibinin personel olup olmadığı bilgisi
-		7. Kartın sahibinin yaşayıp yaşamadığı bilgisi
-		8. Müşterini uyruğu
+		- Doğum ay bilgisi kayıt ayı ile aynı olan öğrenciler getiren sorgu
+
+		- Parametresi ile aldığı doğum tarihi bilgisine göre, doğum günü geçmiş ise -1, doğum günü henüz gelmemiş ise 1
+		ve o gün doğum günü ise sıfır döndüren get_birth_day_status isimli fonksiyonu yazınız
+
+		- Parametresi aldığı doğum tarihi bilgisine göre doğum gününe göre aşağıdaki gibi bir Türkçe mesaj döndüren
+		get_birth_day_message fonksiyonunu yazınız:
+		Doğum günü geçmiş ise "Geçmiş doğum gününüz kutlu olsun"
+		Doğum günü henüz gelmemişse "Doğum gününüz şimdiden kutlu olsun"
+		Doğum günü ise "Doğum gününüz kutlu olsun"
+
+		Bu fonksiyonu sorgu içerisinde kullanarak test edebilirsiniz
+
+		- Parametresi ile aldığı yaş eşik değerine göre eşik değerinden büyük ve küçük olanları yine parametresi ile
+		aldığı iki yazı ile gösteren sorguyu döndüren get_students_with_age_status fonksiyonunu yazınız.
+		Örneğin:
+			select * from dbo.get_students_with_age_status(18, 'Reşit', 'Reşit Değil')		
 ----------------------------------------------------------------------------------------------------------------------*/
+declare @month int = 2
+declare @year int = 2020
+
+declare @date date = DATEFROMPARTS(@year, @month, 1)
+select EOMONTH(@date)
