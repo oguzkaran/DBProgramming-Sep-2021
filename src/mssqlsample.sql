@@ -197,6 +197,9 @@ end
 go
 
 -- 1
+
+go
+
 create function get_card_info_by_customer_number(@number char(40)) 
 returns table
 as
@@ -215,4 +218,32 @@ return (
 )
 
 go
+
+-- 2
+
+go
+
+create function get_nonlocal_customer_info_by_card_type(@card_type_id int) 
+returns table
+as
+return (
+	select 
+	dbo.get_full_name(cu.first_name, cu.middle_name, cu.family_name) as fullname,
+	dbo.hide_text_right(ca.number, 'X', 4) as card_number,
+	dbo.hide_text_right(ca.cvv, '*', 1) cvv,
+	ct.description as card_type,
+	dbo.get_status(cu.is_personnel, 'PERSONEL', 'PERSONEL DEĞİL') as personnel_status,
+	dbo.get_status(cu.is_alive, 'SAĞ', 'ÖLÜ') as alive_status,
+	n.description as nationality
+	from 
+	cards ca inner join customers cu on ca.customer_id = cu.customer_id
+	inner join nationalities n on cu.nationality_id = n.nationality_id
+	inner join card_types ct on ca.card_type_id = ct.card_type_id
+	where cu.is_active = 1 and cu.is_local = 0 and ca.card_type_id = @card_type_id
+)
+
+
+go
+
+
 
