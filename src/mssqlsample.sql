@@ -1,110 +1,113 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Aşağıdaki veritabanını oluşturunuz ve sorulara ilişkin stored procedure (sp)'ları yazınız.
-	cities:
-		- city_id
-		- name
-	patients:
-		- patient_id
-		- name 
-		- city_id
-		- birth_date
-	relations:
-		- relation_id
-		- description (Annesi, Babası, Çocuğu, Teyzesi, Halası, Amcası, Dayısı, Yeğeni, Kuzeni vs)
-	companions:
-		- companion_id
-		- name
-		- patient_id
-		- relation_id 
-	
-	Sorular:
-	1. Tüm patient_id'lere ilişkin hastaların isimlerini büyük harfe çeviren sp'yi yazınız
-	2. İl id'sine göre hastaların refakatçi isimlerini küçük harfe çeviren sp'yi yazınız
-	3. Belirli bir yaştan büyük olan hastaların refakatçi ve kendi isimlerini büyük harfe çeviren sp'yi yazınız
+	Sınıf Çalışması: Basit bir çoktan seçmeliyarışmaya ilişkin aşağıdaki veritabanının oluşturunuz. Tüm soruların
+	değişken sayıda seçenekleri olacaktır
+
+	levels
+		- level_id
+		- description
+	questions:
+		- question_id
+		- description
+		- level_id
+		- answer_index
+	options:
+		- option_id
+		- description
+		- question_id
+	Buna göre:
+	1. Her çalıştırıldığında herhangi bir seviyeden rasgele bir soru getiren sorguyu yazınız
+	2. TODO: Parametresi ile aldığı level_id bilgisine göre rasgele bir soru getiren sorguya ilişkin fonksiyonu yazınız
 ----------------------------------------------------------------------------------------------------------------------*/
-create database patientscaredb
+create database competitionappdb
 
 go
 
-use patientscaredb
+use competitionappdb
 
 go
 
-create table cities (
-	city_id int primary key identity(1, 1),
-	description nvarchar(50) not null
+create table levels (
+	level_id int primary key identity(1, 1),
+	description nvarchar(32) not null
 )
 
 go
 
-create table relations (
-	relation_id int primary key identity(1, 1),
-	description nvarchar(50) not null
+insert into levels (description) values ('Başlangıç'), ('Orta'), ('İleri')
+
+go
+
+create table questions (
+	question_id int primary key identity(1, 1),
+	description nvarchar(MAX) not null,
+	level_id int foreign key references levels(level_id) not null,
+	answer_index int not null
 )
 
 go
 
-create table patients (
-	patient_id int primary key identity(1, 1),
-	name nvarchar(100) not null,
-	city_id int foreign key references cities(city_id),
-	birth_date date not null
+create table options (
+	option_id int primary key identity(1, 1),
+	description nvarchar(32) not null,
+	question_id int foreign key references questions(question_id) not null
 )
 
 go
 
-create table companions (
-	companion_id int primary key identity(1, 1),
-	name nvarchar(100) not null,
-	patient_id int foreign key references patients(patient_id),
-	relation_id int foreign key references relations(relation_id)
-)
+
+create view v_get_random
+as
+select rand() as random
 
 go
 
--- 1
-
-create procedure sp_make_patients_name_upper 
-as 
+create function random_int(@min int, @max int) --[min, max)
+returns int
 begin
-	update patients set name = UPPER(name)	
+	declare @random float
+	set @random = (select random from v_get_random)
+	return floor(@random * (@max - @min) + @min)
 end
 
+
 go
 
--- 2
-
-create procedure sp_make_companion_names_lower_by_city_id(@city_id int) --TODO: transaction safe yapınız
+-- 1. 
+create function get_random_question()
+returns int
 as
 begin
-	declare crs_patients cursor for select patient_id from patients where city_id = @city_id
-	open crs_patients
-	declare @patient_id int
+	declare @result int = 0
+	declare @question_id int = 0
+	declare crs_questions cursor scroll for select question_id from questions
+	open crs_questions
 
-	fetch next from crs_patients into @patient_id	
+	declare @max int = (select COUNT(*) from questions) + 1
+	declare @min int = 1
+	declare @index int = dbo.random_int(@min, @max)
 
-	while @@FETCH_STATUS = 0
-	begin
-		declare crs_companions cursor for select companion_id from companions where patient_id = @patient_id
-		open crs_companions
-		declare @companion_id int
+	fetch absolute @index from crs_questions into @question_id
 
-		fetch next from crs_companions into @companion_id
+	if @@FETCH_STATUS = 0
+		set @result = @question_id
 
-		while @@FETCH_STATUS = 0
-		begin
-			update companions set name = LOWER(name) where companion_id = @companion_id
-			fetch next from crs_companions into @companion_id
-		end
+	close crs_questions
+	deallocate crs_questions
 
-		close crs_companions
-		deallocate crs_companions
-		fetch next from crs_patients into @patient_id	
-	end
-
-	close crs_patients
-	deallocate crs_patients
+	return @result
 end
+
+
+go
+
+create function get_question_details_by_id(@question_id int)
+returns table
+as
+return (
+	select q.description
+	from 
+	questions q inner join options o on q.question_id = o.question_id where q.question_id = @question_id
+)
 
 
 
