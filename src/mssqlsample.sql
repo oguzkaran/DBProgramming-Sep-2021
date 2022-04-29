@@ -1,115 +1,194 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Basit bir çoktan seçmeliyarışmaya ilişkin aşağıdaki veritabanının oluşturunuz. Tüm soruların
-	değişken sayıda seçenekleri olacaktır
+	Sınıf Çalışması: Aşağıdaki tabloları schooldb veritabanında oluşturunuz
+	- students
+		- student_id
+		- citizen_number
+		- first_name
+		- middle_name
+		- last_name
+		- birth_date
+		- address
+	 - lectures
+		- lecture_code char(7) primary key
+		- name
+		- credits
+	- grades
+		- grade_id
+		- description
+		- value
+	- enrolls
+		- enroll_id
+		- student_id
+		- lecture_code
+		- grade_id
 
-	levels
-		- level_id
-		- description
-	questions:
-		- question_id
-		- description
-		- level_id
-		- answer_index
-	options:
-		- option_id
-		- description
-		- question_id
-	Buna göre:
-	1. Her çalıştırıldığında herhangi bir seviyeden rasgele bir soru getiren sorguyu yazınız
-	2. TODO: Parametresi ile aldığı level_id bilgisine göre rasgele bir soru getiren sorguya ilişkin fonksiyonu yazınız
+	Harf notları aşağıdaki gibi olabilir:
+	AA	-> 4.0
+	BA	-> 3.5
+	BB	-> 3.0
+	CB	-> 2.5
+	CC	-> 2.0
+	DC	-> 1.5
+	DD	-> 1.0
+	FD	-> 0.5
+	FF	-> 0.0
+	NA	-> -1
+	P	-> -1
+	Bu bilgilere göre 
+	- MAT 101 dersi için öğrencilerin sayısını notlara göre gruplayarak getiren sorgu
+	- Kredi toplamları 100'den büyük olan öğrencilerin bilgilerini getiren sorgu
+	- Her bir dersi alan öğrencilerin sayısını veren sorgu
+	- Dersi 3'den fazla kez alan öğrencilerin kayıt olduğu dersleri gruplayan sorgu
+	- Dersi 3'den fazla kez alan öğrencinin kayıt olduğu derslerin not ortalamasını getiren sorgu
+
+	Aşağıdaki örnekte function, procedure view'ler için yetki verildiğine dikkat ediniz. Bu durumda umut isimli login
+	tablolara erişemez ancak yetki verilen function, procedure ve view'lar işlem yapabilir. Örneği inceleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
-create database competitionappdb
+
+create database dbprogs21_schooldb;
 
 go
 
-use competitionappdb
+use dbprogs21_schooldb;
 
 go
 
-create table levels (
-	level_id int primary key identity(1, 1),
-	description nvarchar(32) not null
+create table students(
+	student_id int primary key identity(1, 1),
+	citizen_number char(30) not null,
+	first_name nvarchar(100) not null,
+	middle_name nvarchar(100),
+	last_name nvarchar(100) not null,
+	birth_date date not null,
+	address nvarchar(max) not null
 )
 
 go
 
-insert into levels (description) values ('Başlangıç'), ('Orta'), ('İleri')
-
-go
-
-create table questions (
-	question_id int primary key identity(1, 1),
-	description nvarchar(MAX) not null,
-	level_id int foreign key references levels(level_id) not null,
-	answer_index int not null
+create table lectures(
+	lecture_code char(7) primary key,
+	name nvarchar(100) not null,
+	credits int not null
 )
 
 go
 
-create table options (
-	option_id int primary key identity(1, 1),
-	description nvarchar(32) not null,
-	question_id int foreign key references questions(question_id) not null
+create table grades (
+	grade_id int primary key identity(1, 1),
+	description char(2) not null,
+	value real not null
 )
+
 
 go
 
+insert into grades (description, value) 
+values
+('AA', 4.0),
+('BA', 3.5),
+('BB', 3.0),
+('CB', 2.5),
+('CC', 2.0),
+('DC', 1.5),
+('DD', 1.0),
+('FD', 0.5),
+('FF', 0.0),
+('NA', -1),
+('P', -1)
 
-create view v_get_random
+go
+
+create table enrolls (
+	enroll_id int primary key identity(1, 1),
+	student_id int foreign key references students(student_id) not null,
+	lecture_code char(7) foreign key references lectures(lecture_code) not null,
+	grade_id int foreign key references grades(grade_id) not null,
+) 
+
+
+go
+
+create procedure sp_insert_lecture(@lecture_code char(7), @name nvarchar(100), @credits int)
 as
-select rand() as random
-
-go
-
-create function random_int(@min int, @max int) --[min, max)
-returns int
 begin
-	declare @random float
-	set @random = (select random from v_get_random)
-	return floor(@random * (@max - @min) + @min)
+	if @credits > 0
+		insert into lectures (lecture_code, name, credits) values (@lecture_code, @name, @credits)
 end
 
-
 go
 
--- 1. 
-create function get_random_question()
-returns int
-as
-begin
-	declare @result int = 0
-	declare @question_id int = 0
-	declare crs_questions cursor scroll for select question_id from questions
-	open crs_questions
+-- MAT 101 dersi için öğrencilerin sayısını notlara göre gruplayarak getiren sorgu
 
-	declare @max int = (select COUNT(*) from questions) + 1
-	declare @min int = 1
-	declare @index int = dbo.random_int(@min, @max)
-
-	fetch absolute @index from crs_questions into @question_id
-
-	if @@FETCH_STATUS = 0
-		set @result = @question_id
-
-	close crs_questions
-	deallocate crs_questions
-
-	return @result
-end
-
-
-go
-
-create function get_question_details_by_id(@question_id int)
+create function get_students_grade_count_by_lecture_code(@lecture_code char(7))
 returns table
 as
 return (
-	select q.description
-	from 
-	questions q inner join options o on q.question_id = o.question_id where q.question_id = @question_id
+	select g.description, count(*) as count from enrolls e inner join grades g on g.grade_id=e.grade_id
+	where e.lecture_code = @lecture_code group by g.description
 )
 
 
+go
+
+-- Kredi toplamları 100'den büyük olan öğrencilerin bilgilerini getiren sorgu
+-- TODO: write function and give permission to umut
+select s.citizen_number, sum(lec.credits), s.first_name + ' ' + s.last_name 
+from lectures lec inner join enrolls e on e.lecture_code = lec.lecture_code
+inner join students s on e.student_id = s.student_id where e.grade_id <= 5
+group by s.citizen_number, s.first_name + ' ' + s.last_name having sum(lec.credits) > 100
+
+go
+
+-- Her bir dersi alan öğrencilerin sayısını veren sorgu
+create view v_students_group_by_lecture
+as
+select lec.lecture_code, lec.name, count(*) as count
+from lectures lec inner join enrolls e on e.lecture_code = lec.lecture_code
+group by lec.lecture_code, lec.name
 
 
 
+go
+-- Dersi 3'den fazla kez alan öğrencilerin kayıt olduğu dersleri gruplayan sorgu
+-- TODO: write function and give permission to umut
+select lec.lecture_code, lec.name, count(*) 
+from lectures lec inner join enrolls e on e.lecture_code = lec.lecture_code
+group by lec.lecture_code, lec.name having count(*) > 3 order by lec.lecture_code
+
+
+go
+
+-- Dersi 3'den fazla kez alan öğrencinin kayıt olduğu derslerin not ortalamasını getiren sorgu
+-- TODO: write function and give permission to umut
+select lec.lecture_code, lec.name, avg(lec.credits * g.value) 
+from lectures lec inner join enrolls e on e.lecture_code = lec.lecture_code
+inner join grades g on g.grade_id=e.grade_id
+group by lec.lecture_code, lec.name having count(*) > 3 order by lec.lecture_code
+
+
+go
+
+
+-- Login ddl
+
+create login umut with password='123456'
+
+go
+
+use dbprogs21_schooldb
+
+go
+
+create user umut
+
+go
+
+grant select on get_students_grade_count_by_lecture_code to umut
+
+go
+
+grant execute on sp_insert_lecture to umut
+
+go
+
+grant select on v_students_group_by_lecture to umut
