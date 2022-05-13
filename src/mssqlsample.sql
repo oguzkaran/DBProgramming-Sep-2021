@@ -1,48 +1,14 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Aşağıdaki tabloları schooldb veritabanında oluşturunuz
-	- students
-		- student_id
-		- citizen_number
-		- first_name
-		- middle_name
-		- last_name
-		- birth_date
-		- address
-	 - lectures
-		- lecture_code char(7) primary key
-		- name
-		- credits
-	- grades
-		- grade_id
-		- description
-		- value
-	- enrolls
-		- enroll_id
-		- student_id
-		- lecture_code
-		- grade_id
+	Indeks, veritabanında tablolar üzerinde tanımlanan ve ilgili veriye daha az işlem yaparak dolayısıyla hızlı 
+	bir şekilde erişilmesini sağlayan bir araçtır. Indeksleme çeşitli biçimlerde olabilmektedir. Hangi biçimde 
+	olursa olsun temel amaç hızdır. Primary key ve unique alanlar default olarak indekslenir. Programcı da isterse 
+	başka alanları indeksleyebilir.
 
-	Harf notları aşağıdaki gibi olabilir:
-	AA	-> 4.0
-	BA	-> 3.5
-	BB	-> 3.0
-	CB	-> 2.5
-	CC	-> 2.0
-	DC	-> 1.5
-	DD	-> 1.0
-	FD	-> 0.5
-	FF	-> 0.0
-	NA	-> -1
-	P	-> -1
-	Bu bilgilere göre 
-	- MAT 101 dersi için öğrencilerin sayısını notlara göre gruplayarak getiren sorgu
-	- Kredi toplamları 100'den büyük olan öğrencilerin bilgilerini getiren sorgu
-	- Her bir dersi alan öğrencilerin sayısını veren sorgu
-	- Dersi 3'den fazla kez alan öğrencilerin kayıt olduğu dersleri gruplayan sorgu
-	- Dersi 3'den fazla kez alan öğrencinin kayıt olduğu derslerin not ortalamasını getiren sorgu
-
-	Aşağıdaki örnekte function, procedure view'ler için yetki verildiğine dikkat ediniz. Bu durumda umut isimli login
-	tablolara erişemez ancak yetki verilen function, procedure ve view'lar işlem yapabilir. Örneği inceleyiniz
+	Yeni bir veritabanı yaratıldığında veritabanının bulunduğu dosyalar belirtilmiş olur. SQL Server bu dosyaları
+	mantıksal olarak 8KB'lik sayfalara (page) böler. Bu sayfalara sıfırdan başlayan indeks numaraları verir. Bu işlem
+	işletim sisteminin dosya sisteminden (file system) bapğımsızdır. Sayfalar içeisinde satırlar (row) bulunur. Peşpeşe 
+	gelen 8 tane 8KB'lik yani 64KB'lik veri yapısına "extent" denir. Her page'in satır sayısı aynı olmak zorunda değildir.
+	...
 ----------------------------------------------------------------------------------------------------------------------*/
 
 create database dbprogs21_schooldb;
