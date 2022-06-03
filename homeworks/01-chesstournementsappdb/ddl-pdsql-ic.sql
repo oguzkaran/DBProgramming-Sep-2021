@@ -95,6 +95,10 @@ create table results (
 
 go
 
+
+
+go
+
 create table matches (
 	match_id int primary key identity(1, 1),
 	player1_id int foreign key references players(player_id) not null,
