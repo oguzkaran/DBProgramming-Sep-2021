@@ -3076,13 +3076,13 @@ insert into players  (club_id, ranking_code, communication_id) values (23, 1000,
 insert into tournaments (organizer_id, start_date, end_date, name) values (1, '2022-05-05', '2022-05-03', 'Pulorejo');
 insert into tournaments (organizer_id, start_date, end_date, name) values (2, '2022-05-06', '2022-05-07', 'Puan');
 insert into tournaments (organizer_id, start_date, end_date, name) values (3, '2022-05-07', '2022-05-02', 'Las Heras');
-insert into tournaments (organizer_id, start_date, end_date, name) values (4, '2022-05-02', '2022-05-03', 'Naviraí');
+insert into tournaments (organizer_id, start_date, end_date, name) values (4, '2022-05-02', '2022-05-03', 'NaviraÃ­');
 insert into tournaments (organizer_id, start_date, end_date, name) values (5, '2022-05-04', '2022-05-05', 'Litian');
 insert into tournaments (organizer_id, start_date, end_date, name) values (6, '2022-05-05', '2022-05-04', 'El Tejocote');
-insert into tournaments (organizer_id, start_date, end_date, name) values (7, '2022-05-04', '2022-05-07', 'Santana de Parnaíba');
+insert into tournaments (organizer_id, start_date, end_date, name) values (7, '2022-05-04', '2022-05-07', 'Santana de ParnaÃ­ba');
 insert into tournaments (organizer_id, start_date, end_date, name) values (8, '2022-05-03', '2022-05-02', 'Tanda');
 insert into tournaments (organizer_id, start_date, end_date, name) values (9, '2022-05-01', '2022-05-05', 'Argotirto Krajan');
-insert into tournaments (organizer_id, start_date, end_date, name) values (10, '2022-05-04', '2022-05-03', 'Mólos');
+insert into tournaments (organizer_id, start_date, end_date, name) values (10, '2022-05-04', '2022-05-03', 'MÃ³los');
 insert into tournaments (organizer_id, start_date, end_date, name) values (11, '2022-05-01', '2022-05-01', 'Umuahia');
 insert into tournaments (organizer_id, start_date, end_date, name) values (12, '2022-05-03', '2022-05-06', 'Wujiashan');
 insert into tournaments (organizer_id, start_date, end_date, name) values (13, '2022-05-05', '2022-05-07', 'Kankan');
