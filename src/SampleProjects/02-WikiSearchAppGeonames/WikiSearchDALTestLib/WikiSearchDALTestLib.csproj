@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\WikiSearchAppEntitiesLib.csproj" />
+    <ProjectReference Include="..\WikiSearchAppDALLib\WikiSearchAppDALLib.csproj" />
+    <ProjectReference Include="..\WikiSearchAppGeonamesLib\WikiSearchAppGeonamesLib.csproj" />
+    <ProjectReference Include="..\WikiSearchAppRepositoryLib\WikiSearchAppRepositoryLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CSD.Util.Mappers">
+      <HintPath>..\..\..\..\..\Libraries\MapperUtilLib\bin\Release\net5.0\CSD.Util.Mappers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

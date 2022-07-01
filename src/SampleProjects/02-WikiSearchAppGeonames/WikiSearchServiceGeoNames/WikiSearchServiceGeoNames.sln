@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchServiceGeoNames", "WikiSearchServiceGeoNames.csproj", "{8485BF0C-D56F-46C1-9DE3-AA979E5945B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchAppRepositoryLib", "..\WikiSearchAppRepositoryLib\WikiSearchAppRepositoryLib.csproj", "{B6A7A4E9-F0B1-4C9D-9B45-3F346A3BD29C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchAppEntitiesLib", "..\Entities\WikiSearchAppEntitiesLib.csproj", "{3910E845-85FD-4009-82B6-8EB2B2131C38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchAppServiceLib", "..\WikiSearchAppServiceLib\WikiSearchAppServiceLib.csproj", "{3E92133D-37B7-4A6C-B282-1959175CF411}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchAppDALLib", "..\WikiSearchAppDALLib\WikiSearchAppDALLib.csproj", "{7F985F6D-5A67-44BE-B2BC-75D52F0594A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchAppGeonamesLib", "..\WikiSearchAppGeonamesLib\WikiSearchAppGeonamesLib.csproj", "{4EDF24CB-15DB-4220-9C7B-6AE158721507}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchGeoNUnitTest", "..\WikiSearchGeoNUnitTest\WikiSearchGeoNUnitTest.csproj", "{A4E6E775-F1DF-4813-9401-DEF986669672}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchDALTestLib", "..\WikiSearchDALTestLib\WikiSearchDALTestLib.csproj", "{940FDFE3-EDAF-44A6-8DA6-9BE51442711E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WikiSearchServiceTestLib", "..\WikiSearchServiceTestLib\WikiSearchServiceTestLib.csproj", "{E509A994-9FCB-4B9A-A3B8-CC18F7CBD8E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8485BF0C-D56F-46C1-9DE3-AA979E5945B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8485BF0C-D56F-46C1-9DE3-AA979E5945B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8485BF0C-D56F-46C1-9DE3-AA979E5945B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8485BF0C-D56F-46C1-9DE3-AA979E5945B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A7A4E9-F0B1-4C9D-9B45-3F346A3BD29C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A7A4E9-F0B1-4C9D-9B45-3F346A3BD29C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A7A4E9-F0B1-4C9D-9B45-3F346A3BD29C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A7A4E9-F0B1-4C9D-9B45-3F346A3BD29C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3910E845-85FD-4009-82B6-8EB2B2131C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3910E845-85FD-4009-82B6-8EB2B2131C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3910E845-85FD-4009-82B6-8EB2B2131C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3910E845-85FD-4009-82B6-8EB2B2131C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E92133D-37B7-4A6C-B282-1959175CF411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E92133D-37B7-4A6C-B282-1959175CF411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E92133D-37B7-4A6C-B282-1959175CF411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E92133D-37B7-4A6C-B282-1959175CF411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F985F6D-5A67-44BE-B2BC-75D52F0594A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F985F6D-5A67-44BE-B2BC-75D52F0594A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F985F6D-5A67-44BE-B2BC-75D52F0594A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F985F6D-5A67-44BE-B2BC-75D52F0594A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EDF24CB-15DB-4220-9C7B-6AE158721507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDF24CB-15DB-4220-9C7B-6AE158721507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDF24CB-15DB-4220-9C7B-6AE158721507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDF24CB-15DB-4220-9C7B-6AE158721507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E6E775-F1DF-4813-9401-DEF986669672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E6E775-F1DF-4813-9401-DEF986669672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E6E775-F1DF-4813-9401-DEF986669672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E6E775-F1DF-4813-9401-DEF986669672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{940FDFE3-EDAF-44A6-8DA6-9BE51442711E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{940FDFE3-EDAF-44A6-8DA6-9BE51442711E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{940FDFE3-EDAF-44A6-8DA6-9BE51442711E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{940FDFE3-EDAF-44A6-8DA6-9BE51442711E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E509A994-9FCB-4B9A-A3B8-CC18F7CBD8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E509A994-9FCB-4B9A-A3B8-CC18F7CBD8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E509A994-9FCB-4B9A-A3B8-CC18F7CBD8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E509A994-9FCB-4B9A-A3B8-CC18F7CBD8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55DF15DF-EB52-4164-92E3-7249B34B79A5}
+	EndGlobalSection
+EndGlobal

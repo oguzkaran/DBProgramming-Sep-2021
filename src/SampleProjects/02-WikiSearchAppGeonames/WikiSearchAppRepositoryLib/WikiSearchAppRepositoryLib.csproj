@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>CSD.WikiSearchApp.Data.Repositories</RootNamespace>
+    <AssemblyName>CSD.WikiSearchAppRepositoryLib</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>    
+    
+    <ProjectReference Include="..\Entities\WikiSearchAppEntitiesLib.csproj" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CSD.Data"> 
+      <HintPath>..\..\..\..\..\Libraries\DataUtilLib\bin\Release\net5.0\CSD.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CSD.Util.TPL">
+      <HintPath>..\..\..\..\..\Libraries\TaskUtilLib\bin\Release\net5.0\CSD.Util.TPL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

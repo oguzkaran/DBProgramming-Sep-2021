@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>CSD.WikiSearchApp.Data.Services</RootNamespace>
+    <AssemblyName>CSD.WikiSearchAppServiceLib</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    
+    
+    <ProjectReference Include="..\Entities\WikiSearchAppEntitiesLib.csproj" />
+    <ProjectReference Include="..\WikiSearchAppRepositoryLib\WikiSearchAppRepositoryLib.csproj" />
+    <ProjectReference Include="..\WikiSearchAppDALLib\WikiSearchAppDALLib.csproj" />    
+    <ProjectReference Include="..\WikiSearchAppGeonamesLib\WikiSearchAppGeonamesLib.csproj" />    
+
+    <PackageReference Include="Mapster" Version="7.2.0" />
+  </ItemGroup>
+  
+<ItemGroup>
+    <Reference Include="CSD.Data">
+      <HintPath>..\..\..\..\..\Libraries\DataUtilLib\bin\Release\net5.0\CSD.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CSD.Util.Mappers">
+      <HintPath>..\..\..\..\..\Libraries\MapperUtilLib\bin\Release\net5.0\CSD.Util.Mappers.dll</HintPath>
+    </Reference>
+</ItemGroup>
+
+</Project>
